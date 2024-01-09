@@ -1,3 +1,4 @@
+import { CustomChart } from "pfe-chartsv";
 import { Button } from "../Components/Button";
 
 export const Home = () => {
@@ -35,6 +36,12 @@ export const Home = () => {
         </div>
         <div>
           <img src="./test.png" alt="" />
+          <CustomChart
+            link={"./test.csv"}
+            title={"Custom chart"}
+            description={"Custom description"}
+            cols={["age", "monnaie"]}
+          />
         </div>
       </div>
     </div>
