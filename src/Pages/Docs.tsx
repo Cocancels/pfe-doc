@@ -20,6 +20,7 @@ interface SidebarProps {
   exampleRef: any;
   importButtonRef: any;
   chartCreatorRef: any;
+  githubRef: any;
 }
 
 export const Docs = () => {
@@ -32,6 +33,7 @@ export const Docs = () => {
   const exampleRef = useRef(null);
   const importButtonRef = useRef(null);
   const chartCreatorRef = useRef(null);
+  const githubRef = useRef(null);
 
   return (
     <div className="flex bg-main">
@@ -45,6 +47,7 @@ export const Docs = () => {
         exampleRef={exampleRef}
         importButtonRef={importButtonRef}
         chartCreatorRef={chartCreatorRef}
+        githubRef={githubRef}
       />
       <div className="w-full">
         <div className="w-full flex justify-center mt-5 text-white">
@@ -202,6 +205,19 @@ export const Docs = () => {
                 section.
               </ParagraphSection>
             </SubSection>
+            <SubSection title="Github" thisRef={githubRef}>
+              <ParagraphSection>
+                You can find the Github repository of ChartSV{" "}
+                <a
+                  className="font-bold hover:text-blue-400 transition duration-200 cursor-pointer"
+                  href="https://github.com/Cocancels/pfe-chartsv"
+                  target="_blank"
+                >
+                  here
+                </a>
+                .
+              </ParagraphSection>
+            </SubSection>
 
             <div className="w-full mt-24">
               <MainSection title="Installation" thisRef={installationRef} />
@@ -218,6 +234,7 @@ export const Docs = () => {
                   text={`npm install pfe-chartsv`}
                   language="bash"
                   theme={dracula}
+                  customStyle={{ overflow: "hidden" }}
                 />
                 <ParagraphSection>
                   You can then try it by importing a component, for example :
@@ -235,6 +252,7 @@ const App = () => {
 export default App`}
                   language="jsx"
                   theme={dracula}
+                  customStyle={{ overflow: "hidden" }}
                 />
                 <ParagraphSection>
                   If you have the import button displayed, then you have
@@ -302,6 +320,7 @@ const App = () => {
 export default App`}
                   language="jsx"
                   theme={dracula}
+                  customStyle={{ overflow: "hidden" }}
                 />
                 <ParagraphSection>Here are the props :</ParagraphSection>
                 <CodeBlock
@@ -312,7 +331,18 @@ export default App`}
                   showLineNumbers={false}
                   language="tsx"
                   theme={dracula}
+                  customStyle={{ overflow: "hidden" }}
                 />
+                <PropsParameterSection>
+                  <PropsParameter
+                    title="size: small | medium | large"
+                    description="The size of the button."
+                  />
+                  <PropsParameter
+                    title="color: white | black"
+                    description="The color of the button."
+                  />
+                </PropsParameterSection>
               </SubSection>
               <SubSection title="CustomChart" thisRef={chartCreatorRef}>
                 <ParagraphSection>
@@ -357,6 +387,7 @@ const App = () => {
 export default App`}
                   language="jsx"
                   theme={dracula}
+                  customStyle={{ overflow: "hidden" }}
                 />
                 <ParagraphSection>Here are the props :</ParagraphSection>
                 <CodeBlock
@@ -381,7 +412,70 @@ export default App`}
                   showLineNumbers={false}
                   language="tsx"
                   theme={dracula}
+                  customStyle={{ overflow: "hidden" }}
                 />
+                <PropsParameterSection>
+                  <PropsParameter
+                    title="link: String"
+                    description="Use the path to the CSV file you want to use."
+                  />
+                  <PropsParameter
+                    title="cols: String [ ]"
+                    description="The name of the columns you want to show on the chart. Only the columns with numbers will be shown."
+                  />
+                  <PropsParameter
+                    title="chartParams: Object"
+                    description="The parameters of the chart. You can find all the parameters available below."
+                  />
+                  <PropsParameter
+                    title="chartParams.type: bar | line | area | table | pie"
+                    description="The type of the chart. The default value is 'bar'."
+                  />
+                  <PropsParameter
+                    title="chartParams.stacked: Boolean"
+                    description="If true, the chart will be stacked. The default value is false. Only works with bar, line and area charts."
+                  />
+                  <PropsParameter
+                    title="chartParams.stackType: Boolean"
+                    description="If true, the chart will show values as a percentage. The default value is false. Only works with bar, line and area charts."
+                  />
+                  <PropsParameter
+                    title="chartParams.showLabels: Boolean"
+                    description="If true, the chart will show labels. The default value is false."
+                  />
+                  <PropsParameter
+                    title="chartParams.yAxisMax: Number"
+                    description="The maximum value of the Y axis."
+                  />
+                  <PropsParameter
+                    title="chartParams.yAxisMin: Number"
+                    description="The minimum value of the Y axis."
+                  />
+                  <PropsParameter
+                    title="chartParams.height: Number | String"
+                    description="The height of the chart, in number, pixels or percentage."
+                  />
+                  <PropsParameter
+                    title="chartParams.width: Number | String"
+                    description="The width of the chart, in number, pixels or percentage."
+                  />
+                  <PropsParameter
+                    title="chartParams.colors: String [ ]"
+                    description="The colors of the chart. You can add as many colors as you want, and the chart will use them in order."
+                  />
+                  <PropsParameter
+                    title="chartParams.backgroundColor: String"
+                    description="The background color of the chart."
+                  />
+                  <PropsParameter
+                    title="chartParams.textColor: String"
+                    description="The text color of the chart."
+                  />
+                  <PropsParameter
+                    title="chartParams.toolbar: Boolean"
+                    description="If true, the toolbar will be displayed. The default value is true."
+                  />
+                </PropsParameterSection>
               </SubSection>
             </div>
           </div>
@@ -402,6 +496,7 @@ const Sidebar = (props: SidebarProps) => {
     exampleRef,
     importButtonRef,
     chartCreatorRef,
+    githubRef,
   } = props;
 
   return (
@@ -418,6 +513,9 @@ const Sidebar = (props: SidebarProps) => {
         </SidebarLink>
         <SidebarLink linkRef={exampleRef} depth={2}>
           Examples
+        </SidebarLink>
+        <SidebarLink linkRef={githubRef} depth={2}>
+          Github
         </SidebarLink>
         <SidebarLink linkRef={installationRef} depth={1}>
           Installation
@@ -511,6 +609,34 @@ const ParagraphSection = (props: {
       } text-white text-xl`}
     >
       {props.children}
+    </div>
+  );
+};
+
+interface PropsParameterSectionProps {
+  children: React.ReactNode;
+}
+
+const PropsParameterSection = (props: PropsParameterSectionProps) => {
+  return (
+    <div className="mt-5 mb-5 border-dashed border-l-2 border-gray-600">
+      {props.children}
+    </div>
+  );
+};
+
+interface PropsParameterProps {
+  title: string;
+  description: string;
+}
+
+const PropsParameter = (props: PropsParameterProps) => {
+  return (
+    <div className="mt-5">
+      <h4 className="text-xl text-white bg-blue-500 p-4 inline-block z-20 -ml-2-px">
+        {props.title}
+      </h4>
+      <p className="text-xl text-white p-5">{props.description}</p>
     </div>
   );
 };
