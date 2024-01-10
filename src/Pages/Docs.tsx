@@ -241,7 +241,7 @@ export default App`}
                   properly installed ChartSV !
                 </ParagraphSection>
               </SubSection>
-              <SubSection title="Know issues" thisRef={issuesRef}>
+              <SubSection title="Known issues" thisRef={issuesRef}>
                 <ParagraphSection>
                   If you get an error when executing npm start on /example
                   folder, you have 2 solutions:
@@ -426,7 +426,7 @@ const Sidebar = (props: SidebarProps) => {
           How to install ?
         </SidebarLink>
         <SidebarLink linkRef={issuesRef} depth={2}>
-          Know issues
+          Known issues
         </SidebarLink>
         <SidebarLink linkRef={componentsRef} depth={1}>
           Components
