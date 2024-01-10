@@ -2,6 +2,7 @@ import { CustomChart, ImportButton } from "pfe-chartsv";
 import "pfe-chartsv/dist/index.css";
 
 import { useRef } from "react";
+import { CodeBlock, dracula } from "react-code-blocks";
 
 interface SidebarLinkProps {
   linkRef: any;
@@ -17,6 +18,8 @@ interface SidebarProps {
   componentsRef: any;
   howInstallRef: any;
   exampleRef: any;
+  importButtonRef: any;
+  chartCreatorRef: any;
 }
 
 export const Docs = () => {
@@ -27,6 +30,8 @@ export const Docs = () => {
   const componentsRef = useRef(null);
   const howInstallRef = useRef(null);
   const exampleRef = useRef(null);
+  const importButtonRef = useRef(null);
+  const chartCreatorRef = useRef(null);
 
   return (
     <div className="flex bg-main">
@@ -38,6 +43,8 @@ export const Docs = () => {
         componentsRef={componentsRef}
         howInstallRef={howInstallRef}
         exampleRef={exampleRef}
+        importButtonRef={importButtonRef}
+        chartCreatorRef={chartCreatorRef}
       />
       <div className="w-full">
         <div className="w-full flex justify-center mt-5 text-white">
@@ -59,6 +66,143 @@ export const Docs = () => {
               </ParagraphSection>
             </SubSection>
 
+            <SubSection title="Examples" thisRef={exampleRef}>
+              <ParagraphSection>
+                You have 2 main components available with ChartSV :{" "}
+                <span
+                  className="font-bold hover:text-blue-400 transition duration-200 cursor-pointer"
+                  onClick={() => {
+                    if (importButtonRef.current) {
+                      (importButtonRef.current as any).scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
+                >
+                  ImportButton
+                </span>{" "}
+                and{" "}
+                <span
+                  className="font-bold hover:text-blue-400 transition duration-200 cursor-pointer"
+                  onClick={() => {
+                    if (chartCreatorRef.current) {
+                      (chartCreatorRef.current as any).scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
+                >
+                  CustomChart
+                </span>
+                .
+              </ParagraphSection>
+              <ParagraphSection>
+                <span
+                  className="font-bold hover:text-blue-400 transition duration-200 cursor-pointer"
+                  onClick={() => {
+                    if (importButtonRef.current) {
+                      (importButtonRef.current as any).scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
+                >
+                  ImportButton
+                </span>{" "}
+                is principaly made for users, and it allows them to import a CSV
+                file to then display a customisable chart :
+              </ParagraphSection>
+              <ImportButton size="medium" />
+              <ParagraphSection>
+                <span
+                  className="font-bold hover:text-blue-400 transition duration-200 cursor-pointer"
+                  onClick={() => {
+                    if (chartCreatorRef.current) {
+                      (chartCreatorRef.current as any).scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
+                >
+                  CustomChart
+                </span>{" "}
+                is principaly made for developers, and it allows to create a
+                custom chart from a CSV file in your computer, directly :
+              </ParagraphSection>
+              <CustomChart
+                link={"./test.csv"}
+                cols={["monnaie", "age"]}
+                chartParams={{
+                  width: "100%",
+                  height: 500,
+                  yAxisMax: 100,
+                  yAxisMin: 0,
+                  backgroundColor: "#23272F",
+                  textColor: "#FFFFFF",
+                }}
+              />
+              <ParagraphSection>
+                On the chart above, we linked a CSV file with 5 columns, where 2
+                are numbers. We also added some parameters to the chart, like
+                the height, the width, the background color, the maximum and
+                minimum values of the Y axis.
+              </ParagraphSection>
+              <ParagraphSection>
+                You can see below 2 more examples of charts created with the
+                same CSV file :
+              </ParagraphSection>
+              <div className="flex w-full justify-between">
+                <CustomChart
+                  link={"./test.csv"}
+                  cols={["monnaie", "age"]}
+                  chartParams={{
+                    type: "area",
+                    height: 500,
+                    width: "95%",
+                    colors: ["#FF0000", "#00FF00"],
+                    backgroundColor: "#23272F",
+                    textColor: "#FFFFFF",
+                    toolbar: false,
+                  }}
+                />
+                <CustomChart
+                  link={"./test.csv"}
+                  cols={["monnaie"]}
+                  chartParams={{
+                    type: "pie",
+                    stacked: true,
+                    height: 500,
+                    width: "95%",
+                    backgroundColor: "#23272F",
+                    textColor: "#FFFFFF",
+                    showLabels: true,
+                    toolbar: false,
+                    colors: Array.from(Array(10).keys()).map(
+                      (i) => `rgb(${255 - i * 25}, ${i * 25}, ${255 - i * 25})`
+                    ),
+                  }}
+                />
+              </div>
+              <ParagraphSection>
+                As you can see, we have the same data, but we can create
+                different types of charts, with different parameters. You can
+                find all the parameters available on the{" "}
+                <span
+                  className="font-bold hover:text-blue-400 transition duration-200 cursor-pointer"
+                  onClick={() => {
+                    if (componentsRef.current) {
+                      (componentsRef.current as any).scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
+                >
+                  Components
+                </span>{" "}
+                section.
+              </ParagraphSection>
+            </SubSection>
+
             <div className="w-full mt-24">
               <MainSection title="Installation" thisRef={installationRef} />
               <SubSection
@@ -70,11 +214,28 @@ export const Docs = () => {
                   To install ChartSV, you can use the following command in your
                   terminal :
                 </ParagraphSection>
-                <CodeDisplay code="npm install pfe-chartsv" />
+                <CodeBlock
+                  text={`npm install pfe-chartsv`}
+                  language="bash"
+                  theme={dracula}
+                />
                 <ParagraphSection>
                   You can then try it by importing a component, for example :
                 </ParagraphSection>
-                <CodeDisplay code="import { ImportButton } from 'pfe-chartsv'; \n<ImportButton size='medium' />" />
+                <CodeBlock
+                  text={`import { ImportButton } from 'pfe-chartsv'
+import 'pfe-chartsv/dist/index.css'
+const App = () => {
+  return (
+    <div>
+      <ImportButton size='medium' />
+    </div>
+  )
+}
+export default App`}
+                  language="jsx"
+                  theme={dracula}
+                />
                 <ParagraphSection>
                   If you have the import button displayed, then you have
                   properly installed ChartSV !
@@ -111,34 +272,115 @@ export const Docs = () => {
                   </a>
                 </ParagraphSection>
               </SubSection>
-              <SubSection title="Example" thisRef={exampleRef}>
+            </div>
+            <div className="w-full mt-24">
+              <MainSection title="Components" thisRef={componentsRef} />
+              <SubSection title="ImportButton" thisRef={importButtonRef}>
                 <ParagraphSection>
-                  You have 2 main components available with ChartSV :{" "}
-                  <span className="font-bold">ImportButton</span> and{" "}
-                  <span className="font-bold">ChartCreator</span>.
+                  ImportButton is a component that allows users to import a CSV
+                  file, and then display a chart from it. It is very easy to use
+                  ,you just have to import it, and then use it :
                 </ParagraphSection>
+                <ImportButton size="medium" color="white" />
                 <ParagraphSection>
-                  <span className="font-bold">ImportButton</span> is principaly
-                  made for users, and it allows them to import a CSV file to
-                  then display a customisable chart :
+                  To import it in your project, you can use the following code :
                 </ParagraphSection>
-                <ImportButton size="medium" />
+                <CodeBlock
+                  text={`import { ImportButton } from 'pfe-chartsv'
+import 'pfe-chartsv/dist/index.css'
+const App = () => {
+  return (
+    <div>
+      <ImportButton 
+        size='medium' 
+        color='white'
+      />
+    </div>
+  )
+}
+
+export default App`}
+                  language="jsx"
+                  theme={dracula}
+                />
+                <ParagraphSection>Here are the props :</ParagraphSection>
+                <CodeBlock
+                  text={`{
+  size: 'small' | 'medium' | 'large',
+  color: 'white' | 'black'
+}`}
+                  showLineNumbers={false}
+                  language="tsx"
+                  theme={dracula}
+                />
+              </SubSection>
+              <SubSection title="CustomChart" thisRef={chartCreatorRef}>
                 <ParagraphSection>
-                  <span className="font-bold">CustomChart</span> is principaly
-                  made for developers, and it allows to create a custom chart
-                  from a CSV file in your computer, directly :
+                  CustomChart is a component that allows developers to create a
+                  chart from a CSV file. It is easy to use, you just have to
+                  import it, and choose the parameters you want :
                 </ParagraphSection>
                 <CustomChart
                   link={"./test.csv"}
-                  title={"Test"}
-                  description={"test"}
                   cols={["monnaie", "age"]}
                   chartParams={{
-                    width: 500,
+                    width: "100%",
                     height: 500,
                     yAxisMax: 100,
                     yAxisMin: 0,
+                    backgroundColor: "#23272F",
+                    textColor: "#FFFFFF",
                   }}
+                />
+                <CodeBlock
+                  text={`import { CustomChart } from 'pfe-chartsv'
+import 'pfe-chartsv/dist/index.css'
+const App = () => {
+  return (
+    <div>
+      <CustomChart
+        link={'./test.csv'}
+        cols={['monnaie', 'age']}
+        chartParams={{
+          width: '100%',
+          height: 500,
+          yAxisMax: 100,
+          yAxisMin: 0,
+          backgroundColor: '#23272F',
+          textColor: '#FFFFFF'
+        }}
+      />
+    </div>
+  )
+}
+
+export default App`}
+                  language="jsx"
+                  theme={dracula}
+                />
+                <ParagraphSection>Here are the props :</ParagraphSection>
+                <CodeBlock
+                  text={`{
+  link: string,
+  cols: string[ ],
+  chartParams?: {
+    type?: 'bar' | 'line' | 'area' | 'table' | 'pie'
+    stacked?: boolean
+    stackType?: boolean
+    showLabels?: boolean
+    yAxisMax?: number
+    yAxisMin?: number
+    height?: number | string
+    width?: number | string
+    colors?: string[ ]
+    backgroundColor?: string
+    textColor?: string
+    toolbar?: boolean
+  },
+}`}
+                  showLineNumbers={false}
+                  language="tsx"
+                  theme={dracula}
                 />
               </SubSection>
             </div>
@@ -158,6 +400,8 @@ const Sidebar = (props: SidebarProps) => {
     componentsRef,
     howInstallRef,
     exampleRef,
+    importButtonRef,
+    chartCreatorRef,
   } = props;
 
   return (
@@ -172,6 +416,9 @@ const Sidebar = (props: SidebarProps) => {
         <SidebarLink linkRef={whatIsRef} depth={2}>
           What is ChartSV ?
         </SidebarLink>
+        <SidebarLink linkRef={exampleRef} depth={2}>
+          Examples
+        </SidebarLink>
         <SidebarLink linkRef={installationRef} depth={1}>
           Installation
         </SidebarLink>
@@ -181,11 +428,14 @@ const Sidebar = (props: SidebarProps) => {
         <SidebarLink linkRef={issuesRef} depth={2}>
           Know issues
         </SidebarLink>
-        <SidebarLink linkRef={exampleRef} depth={2}>
-          Example
-        </SidebarLink>
         <SidebarLink linkRef={componentsRef} depth={1}>
           Components
+        </SidebarLink>
+        <SidebarLink linkRef={importButtonRef} depth={2}>
+          ImportButton
+        </SidebarLink>
+        <SidebarLink linkRef={chartCreatorRef} depth={2}>
+          CustomChart
         </SidebarLink>
       </div>
     </div>
@@ -217,33 +467,6 @@ const SidebarLink = (props: SidebarLinkProps) => {
       onClick={() => linkRef.current.scrollIntoView({ behavior: "smooth" })}
     >
       <p>{children}</p>
-    </div>
-  );
-};
-
-interface CodeDisplayProps {
-  code: string;
-}
-
-const CodeDisplay = (props: CodeDisplayProps) => {
-  const { code } = props;
-
-  const formatCode = (code: string) => {
-    const splittedCode = code.split("\\n");
-    const formattedCode = splittedCode.map((line, index) => {
-      return (
-        <span key={index}>
-          {line}
-          <br />
-        </span>
-      );
-    });
-    return formattedCode;
-  };
-
-  return (
-    <div className="bg-gray-500 text-white p-4 font-mono text-lg rounded-md overflow-x-auto">
-      <pre>{formatCode(code)}</pre>
     </div>
   );
 };
