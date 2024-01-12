@@ -21,6 +21,7 @@ interface SidebarProps {
   importButtonRef: any;
   chartCreatorRef: any;
   githubRef: any;
+  formatRef: any;
 }
 
 export const Docs = () => {
@@ -34,6 +35,7 @@ export const Docs = () => {
   const importButtonRef = useRef(null);
   const chartCreatorRef = useRef(null);
   const githubRef = useRef(null);
+  const formatRef = useRef(null);
 
   return (
     <div className="flex bg-main">
@@ -48,13 +50,14 @@ export const Docs = () => {
         importButtonRef={importButtonRef}
         chartCreatorRef={chartCreatorRef}
         githubRef={githubRef}
+        formatRef={formatRef}
       />
       <div className="w-full">
-        <div className="w-full flex justify-center mt-5 text-white">
-          <h1 className="font-bold text-5xl">Documentation</h1>
+        <div className="flex justify-center w-full mt-5 text-white">
+          <h1 className="text-5xl font-bold">Documentation</h1>
         </div>
 
-        <div className="w-full flex justify-start mt-10 p-10">
+        <div className="flex justify-start w-full p-10 mt-10">
           <div className="w-full">
             <MainSection title="Introduction" thisRef={introductionRef} />
             <SubSection title="What is ChartSV ?" thisRef={whatIsRef} lowMargin>
@@ -73,7 +76,7 @@ export const Docs = () => {
               <ParagraphSection>
                 You have 2 main components available with ChartSV :{" "}
                 <span
-                  className="font-bold hover:text-blue-400 transition duration-200 cursor-pointer"
+                  className="font-bold transition duration-200 cursor-pointer hover:text-blue-400"
                   onClick={() => {
                     if (importButtonRef.current) {
                       (importButtonRef.current as any).scrollIntoView({
@@ -86,7 +89,7 @@ export const Docs = () => {
                 </span>{" "}
                 and{" "}
                 <span
-                  className="font-bold hover:text-blue-400 transition duration-200 cursor-pointer"
+                  className="font-bold transition duration-200 cursor-pointer hover:text-blue-400"
                   onClick={() => {
                     if (chartCreatorRef.current) {
                       (chartCreatorRef.current as any).scrollIntoView({
@@ -101,7 +104,7 @@ export const Docs = () => {
               </ParagraphSection>
               <ParagraphSection>
                 <span
-                  className="font-bold hover:text-blue-400 transition duration-200 cursor-pointer"
+                  className="font-bold transition duration-200 cursor-pointer hover:text-blue-400"
                   onClick={() => {
                     if (importButtonRef.current) {
                       (importButtonRef.current as any).scrollIntoView({
@@ -118,7 +121,7 @@ export const Docs = () => {
               <ImportButton size="medium" />
               <ParagraphSection>
                 <span
-                  className="font-bold hover:text-blue-400 transition duration-200 cursor-pointer"
+                  className="font-bold transition duration-200 cursor-pointer hover:text-blue-400"
                   onClick={() => {
                     if (chartCreatorRef.current) {
                       (chartCreatorRef.current as any).scrollIntoView({
@@ -154,7 +157,7 @@ export const Docs = () => {
                 You can see below 2 more examples of charts created with the
                 same CSV file :
               </ParagraphSection>
-              <div className="flex w-full justify-between">
+              <div className="flex justify-between w-full">
                 <CustomChart
                   link={"./test.csv"}
                   cols={["monnaie", "age"]}
@@ -191,7 +194,7 @@ export const Docs = () => {
                 different types of charts, with different parameters. You can
                 find all the parameters available on the{" "}
                 <span
-                  className="font-bold hover:text-blue-400 transition duration-200 cursor-pointer"
+                  className="font-bold transition duration-200 cursor-pointer hover:text-blue-400"
                   onClick={() => {
                     if (componentsRef.current) {
                       (componentsRef.current as any).scrollIntoView({
@@ -209,9 +212,10 @@ export const Docs = () => {
               <ParagraphSection>
                 You can find the Github repository of ChartSV{" "}
                 <a
-                  className="font-bold hover:text-blue-400 transition duration-200 cursor-pointer"
+                  className="font-bold transition duration-200 cursor-pointer hover:text-blue-400"
                   href="https://github.com/Cocancels/pfe-chartsv"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   here
                 </a>
@@ -259,6 +263,37 @@ export default App`}
                   properly installed ChartSV !
                 </ParagraphSection>
               </SubSection>
+              <SubSection title="Format" thisRef={formatRef}>
+                <ParagraphSection>
+                  You need the CSV to have a specific format, where the first
+                  row is the name of the columns, with a coma between each
+                  column name, like this :
+                </ParagraphSection>
+                <CodeBlock
+                  text="monnaie,age,sexe,ville,profession"
+                  language="csv"
+                  theme={dracula}
+                  customStyle={{ overflow: "hidden" }}
+                  showLineNumbers={false}
+                />
+                <ParagraphSection>
+                  Then the lines below are the values of each column, with a
+                  coma between each value, like this :
+                </ParagraphSection>
+                <CodeBlock
+                  text="euro,25,homme,Paris,étudiant
+451,35,femme,Lyon,ingénieur
+1230,45,homme,Paris,ingénieur
+30,55,femme,Lyon,ingénieur
+0,65,homme,Paris,ingénieur
+"
+                  language="csv"
+                  theme={dracula}
+                  customStyle={{ overflow: "hidden" }}
+                  showLineNumbers={false}
+                />
+              </SubSection>
+
               <SubSection title="Known issues" thisRef={issuesRef}>
                 <ParagraphSection>
                   If you get an error when executing npm start on /example
@@ -276,7 +311,7 @@ export default App`}
                   <a
                     href="mailto:
                   corentin.ancel@edu.devinci.fr"
-                    className="text-blue-500 font-bold hover:text-blue-200 transition duration-200"
+                    className="font-bold text-blue-500 transition duration-200 hover:text-blue-200"
                   >
                     corentin.ancel@edu.devinci.fr
                   </a>{" "}
@@ -284,7 +319,7 @@ export default App`}
                   <a
                     href="mailto:
                   kelian.raoult-severac@edu.devinci.fr"
-                    className="text-blue-500 font-bold hover:text-blue-200 transition duration-200"
+                    className="font-bold text-blue-500 transition duration-200 hover:text-blue-200"
                   >
                     kelian.raoult-severac@edu.devinci.fr
                   </a>
@@ -296,8 +331,8 @@ export default App`}
               <SubSection title="ImportButton" thisRef={importButtonRef}>
                 <ParagraphSection>
                   ImportButton is a component that allows users to import a CSV
-                  file, and then display a chart from it. It is very easy to use
-                  ,you just have to import it, and then use it :
+                  file, and then display a chart from it. It is very easy to
+                  use, you just have to import it, and then use it :
                 </ParagraphSection>
                 <ImportButton size="medium" color="white" />
                 <ParagraphSection>
@@ -497,10 +532,11 @@ const Sidebar = (props: SidebarProps) => {
     importButtonRef,
     chartCreatorRef,
     githubRef,
+    formatRef,
   } = props;
 
   return (
-    <div className="flex flex-col w-1/5 h-screen bg-main sticky top-0 text-white p-5">
+    <div className="sticky top-0 flex flex-col w-1/5 h-screen p-5 text-white bg-main">
       <div className="flex justify-center">
         <h3 className="text-3xl">PFE ChartSV</h3>
       </div>
@@ -522,6 +558,9 @@ const Sidebar = (props: SidebarProps) => {
         </SidebarLink>
         <SidebarLink linkRef={howInstallRef} depth={2}>
           How to install ?
+        </SidebarLink>
+        <SidebarLink linkRef={formatRef} depth={2}>
+          Format
         </SidebarLink>
         <SidebarLink linkRef={issuesRef} depth={2}>
           Known issues
@@ -572,7 +611,7 @@ const SidebarLink = (props: SidebarLinkProps) => {
 const MainSection = (props: { title: string; thisRef: any }) => {
   return (
     <div className="w-full" ref={props.thisRef}>
-      <h2 className="text-4xl font-bold border-l-2 p-2 border-blue-700 text-white">
+      <h2 className="p-2 text-4xl font-bold text-white border-l-2 border-blue-700">
         {props.title}
       </h2>
     </div>
@@ -589,7 +628,7 @@ const SubSection = (props: {
     <div className={`w-full ${props.lowMargin ? "mt-3" : "mt-10"}`}>
       <h3
         ref={props.thisRef}
-        className="text-3xl font-italic mt-5 mb-5 text-white font-bold"
+        className="mt-5 mb-5 text-3xl font-bold text-white font-italic"
       >
         {props.title}
       </h3>
@@ -619,7 +658,7 @@ interface PropsParameterSectionProps {
 
 const PropsParameterSection = (props: PropsParameterSectionProps) => {
   return (
-    <div className="mt-5 mb-5 border-dashed border-l-2 border-gray-600">
+    <div className="mt-5 mb-5 border-l-2 border-gray-600 border-dashed">
       {props.children}
     </div>
   );
@@ -633,10 +672,10 @@ interface PropsParameterProps {
 const PropsParameter = (props: PropsParameterProps) => {
   return (
     <div className="mt-5">
-      <h4 className="text-xl text-white bg-blue-500 p-4 inline-block z-20 -ml-2-px">
+      <h4 className="z-20 inline-block p-4 text-xl text-white bg-blue-500 -ml-2-px">
         {props.title}
       </h4>
-      <p className="text-xl text-white p-5">{props.description}</p>
+      <p className="p-5 text-xl text-white">{props.description}</p>
     </div>
   );
 };
