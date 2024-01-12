@@ -144,7 +144,9 @@ export const Docs = () => {
                   yAxisMax: 100,
                   yAxisMin: 0,
                   backgroundColor: "#23272F",
-                  textColor: "#FFFFFF",
+                  labelColor: "#FFFFFF",
+                  axisColor: "#FFFFFF",
+                  legendColor: "#FFFFFF",
                 }}
               />
               <ParagraphSection>
@@ -167,7 +169,9 @@ export const Docs = () => {
                     width: "95%",
                     colors: ["#FF0000", "#00FF00"],
                     backgroundColor: "#23272F",
-                    textColor: "#FFFFFF",
+                    labelColor: "#FFFFFF",
+                    axisColor: "#FFFFFF",
+                    legendColor: "#FFFFFF",
                     toolbar: false,
                   }}
                 />
@@ -180,7 +184,9 @@ export const Docs = () => {
                     height: 500,
                     width: "95%",
                     backgroundColor: "#23272F",
-                    textColor: "#FFFFFF",
+                    labelColor: "#FFFFFF",
+                    axisColor: "#FFFFFF",
+                    legendColor: "#FFFFFF",
                     showLabels: true,
                     toolbar: false,
                     colors: Array.from(Array(10).keys()).map(
@@ -394,7 +400,9 @@ export default App`}
                     yAxisMax: 100,
                     yAxisMin: 0,
                     backgroundColor: "#23272F",
-                    textColor: "#FFFFFF",
+                    labelColor: "#FFFFFF",
+                    axisColor: "#FFFFFF",
+                    legendColor: "#FFFFFF",
                   }}
                 />
                 <CodeBlock
@@ -430,6 +438,10 @@ export default App`}
   link: string,
   cols: string[ ],
   chartParams?: {
+    title?: {
+      text?: string
+      className?: string
+    }
     type?: 'bar' | 'line' | 'area' | 'table' | 'pie'
     stacked?: boolean
     stackType?: boolean
@@ -440,7 +452,9 @@ export default App`}
     width?: number | string
     colors?: string[ ]
     backgroundColor?: string
-    textColor?: string
+    labelColor?: string
+    axisColor?: string
+    legendColor?: string
     toolbar?: boolean
   },
 }`}
@@ -450,6 +464,18 @@ export default App`}
                   customStyle={{ overflow: "hidden" }}
                 />
                 <PropsParameterSection>
+                  <PropsParameter
+                    title="title: Object"
+                    description="Object title. You can find all the parameters available below."
+                  />
+                  <PropsParameter
+                    title="title.text: String"
+                    description="The text of the title."
+                  />
+                  <PropsParameter
+                    title="title.className: String"
+                    description="The className of the title."
+                  />
                   <PropsParameter
                     title="link: String"
                     description="Use the path to the CSV file you want to use."
@@ -503,8 +529,16 @@ export default App`}
                     description="The background color of the chart."
                   />
                   <PropsParameter
-                    title="chartParams.textColor: String"
-                    description="The text color of the chart."
+                    title="chartParams.labelColor: String"
+                    description="The color of the labels in the chart."
+                  />
+                  <PropsParameter
+                    title="chartParams.axisColor: String"
+                    description="The color of the text of the 2 axis."
+                  />
+                  <PropsParameter
+                    title="chartParams.legendColor: String"
+                    description="The color of the legend."
                   />
                   <PropsParameter
                     title="chartParams.toolbar: Boolean"
